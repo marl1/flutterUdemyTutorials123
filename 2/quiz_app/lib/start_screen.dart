@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/quiz.dart';
 
 class StartScreen extends StatelessWidget {
   const StartScreen({super.key});
@@ -20,7 +21,8 @@ class StartScreen extends StatelessWidget {
           ),
           SizedBox(height: 80,),
           OutlinedButton.icon(
-            onPressed: () => print("starting"),
+            onPressed: () { print(context.findAncestorWidgetOfExactType<Quiz>());
+            context.findAncestorWidgetOfExactType<Quiz>()?.switchScreen();},
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white, side: BorderSide(color:Colors.white)),
             icon: Icon(Icons.arrow_circle_right_outlined),
             label: Text("Start Quiz"),

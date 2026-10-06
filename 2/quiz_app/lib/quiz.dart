@@ -3,13 +3,35 @@ import 'package:quiz_app/questions_screen.dart';
 import 'package:quiz_app/start_screen.dart';
 
 class Quiz extends StatefulWidget {
+  var quizState = _QuizState();
   @override
   State<Quiz> createState() {
-    return QuizState();
+    return quizState;
+  }
+
+  void switchScreen() {
+    quizState.switchScreen();
   }
 }
 
-class QuizState extends State<Quiz> {
+class _QuizState extends State<Quiz> {
+  Widget activeScreen = const QuestionsScreen();
+
+  @override
+  void initState() {
+    super.initState();
+    activeScreen = const StartScreen();
+  }
+
+  void switchScreen() {
+    print("changemennnnnt!");
+    setState(() {
+    });
+    
+      activeScreen = const QuestionsScreen();
+      print("changemennnnnt!");
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +47,7 @@ class QuizState extends State<Quiz> {
               ],
             ),
           ),
-          child: StartScreen(),
+          child: activeScreen,
         ),
       ),
     );
