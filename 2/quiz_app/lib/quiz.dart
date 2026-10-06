@@ -3,15 +3,14 @@ import 'package:quiz_app/questions_screen.dart';
 import 'package:quiz_app/start_screen.dart';
 
 class Quiz extends StatefulWidget {
-  var quizState = _QuizState();
   @override
   State<Quiz> createState() {
-    return quizState;
+    return _QuizState();
   }
 }
 
 class _QuizState extends State<Quiz> {
-  late Widget activeScreen = StartScreen(switchScreenFunction: switchScreen);
+  late Widget activeScreen = StartScreen(switchScreen);
 
   void switchScreen() {
     setState(() {

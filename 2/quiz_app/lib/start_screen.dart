@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/quiz.dart';
 
 class StartScreen extends StatelessWidget {
-  final Function switchScreenFunction;
-  const StartScreen({super.key, required this.switchScreenFunction});
+  const StartScreen(this.switchScreenFunction, {super.key});
+  final void Function() switchScreenFunction;
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,7 @@ class StartScreen extends StatelessWidget {
           ),
           SizedBox(height: 80,),
           OutlinedButton.icon(
-            onPressed: () { print(context.findAncestorWidgetOfExactType<Quiz>());
-            switchScreenFunction();},
+            onPressed: switchScreenFunction,
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white, side: BorderSide(color:Colors.white)),
             icon: Icon(Icons.arrow_circle_right_outlined),
             label: Text("Start Quiz"),
