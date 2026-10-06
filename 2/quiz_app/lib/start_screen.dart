@@ -11,7 +11,7 @@ class StartScreen extends StatelessWidget {
         children: [
           Padding(
             padding: EdgeInsetsGeometry.all(16),
-            child: Image.asset("assets/images/quiz-logo.png", width: 300),
+            child: Image.asset("assets/images/quiz-logo.png", color: const Color.fromARGB(150, 255, 255, 255), width: 300),
           ),
           SizedBox(height: 80,), //we could have used a padding widget wrapped around the child
           Text(
@@ -20,7 +20,7 @@ class StartScreen extends StatelessWidget {
           ),
           SizedBox(height: 80,),
           OutlinedButton.icon(
-            onPressed: () => {print("starting")},
+            onPressed: () => print("starting"),
             style: OutlinedButton.styleFrom(foregroundColor: Colors.white, side: BorderSide(color:Colors.white)),
             icon: Icon(Icons.arrow_circle_right_outlined),
             label: Text("Start Quiz"),
