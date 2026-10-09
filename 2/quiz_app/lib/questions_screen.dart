@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quiz_app/answer_button.dart';
@@ -14,6 +16,11 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   final currentQuestion = questions[0];
+
+  List<AnswerButton> generateAnswerButtons() {
+    return (currentQuestion.answers.toList()..shuffle(Random(0))).map(((e) => AnswerButton(e, () {}))).toList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -23,13 +30,8 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           Column(
             children: [
               Text(style: TextStyle(color: Colors.white), currentQuestion.text),
-              SizedBox(height: 15,),
-              Column(children: [
-                AnswerButton(currentQuestion.answers[0], (){}),
-                AnswerButton(currentQuestion.answers[1], (){}),
-                AnswerButton(currentQuestion.answers[2], (){}),
-                AnswerButton(currentQuestion.answers[3], (){}),
-                ]),
+              SizedBox(height: 15),
+              ...generateAnswerButtons(),
             ],
           ),
         ],

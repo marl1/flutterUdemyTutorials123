@@ -6,6 +6,9 @@ const questions = [
     'Zidgets',
     'Bidgets',
     'Didgets',
+    'Pidgets',
+    'Sidgets',
+    'Lidgets',
   ]),
   QuizQuestion('How are Flutter UIs built?', [
     'By combining widgets in code',
