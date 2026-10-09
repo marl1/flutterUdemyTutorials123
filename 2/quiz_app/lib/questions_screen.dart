@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
 
@@ -15,12 +14,19 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
-  final currentQuestion = questions[0];
+  var currentQuestionId = 0;
 
-  List<AnswerButton> generateAnswerButtons() {
-    return (currentQuestion.answers.toList()..shuffle(Random(0)))
-        .map(((e) => AnswerButton(e, () {})))
+  List<AnswerButton> generateAnswerButtons(List<String> answers) {
+    return (answers.toList()..shuffle())
+        .map(((e) => AnswerButton(e, answerQuestion)))
         .toList();
+  }
+
+  void answerQuestion() {
+    setState(() {
+      currentQuestionId++;
+      print("the currentQuestionId = $currentQuestionId");
+    });
   }
 
   @override
@@ -32,9 +38,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch, // ask the children to take all space horizontally
           children: [
-            Text(style: TextStyle(color: Colors.white), textAlign: TextAlign.center, currentQuestion.text),
+            Text(style: TextStyle(color: Colors.white), textAlign: TextAlign.center, questions[currentQuestionId].text),
             SizedBox(height: 15),
-            ...generateAnswerButtons(),
+            ...generateAnswerButtons(questions[currentQuestionId].answers),
           ],
         ),
       ),

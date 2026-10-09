@@ -18,7 +18,7 @@ class AnswerButton extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(10)),
           minimumSize: Size(400, 50)
           ),
-        child: Text(text)),
+        child: Text(text, textAlign: TextAlign.center,)),
     );
   }
 }
