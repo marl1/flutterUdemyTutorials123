@@ -13,6 +13,7 @@ class QuestionsScreen extends StatefulWidget {
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
+  final currentQuestion = questions[0];
   @override
   Widget build(BuildContext context) {
     return Center(
@@ -21,13 +22,13 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
         children: [
           Column(
             children: [
-              Text(style: TextStyle(color: Colors.white), questions[0].text),
+              Text(style: TextStyle(color: Colors.white), currentQuestion.text),
               SizedBox(height: 15,),
               Column(children: [
-                AnswerButton(questions[0].answers[0]),
-                AnswerButton(questions[0].answers[1]),
-                AnswerButton(questions[0].answers[2]),
-                AnswerButton(questions[0].answers[3]),
+                AnswerButton(currentQuestion.answers[0], (){}),
+                AnswerButton(currentQuestion.answers[1], (){}),
+                AnswerButton(currentQuestion.answers[2], (){}),
+                AnswerButton(currentQuestion.answers[3], (){}),
                 ]),
             ],
           ),
