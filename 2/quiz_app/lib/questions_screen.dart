@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:quiz_app/data/questions.dart';
 
@@ -22,10 +23,10 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
               Text(questions[0].text),
               SizedBox(height: 15,),
               Column(children: [
-                Text(questions[0].answers[0]),
-                Text(questions[0].answers[1]),
-                Text(questions[0].answers[2]),
-                Text(questions[0].answers[3]),
+                Padding(padding: EdgeInsetsGeometry.directional(top: 5), child: ElevatedButton(onPressed: null, child:Text(questions[0].answers[0]))),
+                Padding(padding: EdgeInsetsGeometry.directional(top: 5), child:ElevatedButton(onPressed: null, child:Text(questions[0].answers[1]))),
+                Padding(padding: EdgeInsetsGeometry.directional(top: 5), child:ElevatedButton(onPressed: null, child:Text(questions[0].answers[2]))),
+                Padding(padding: EdgeInsetsGeometry.directional(top: 5), child:ElevatedButton(onPressed: null, child:Text(questions[0].answers[3]))),
                 ]),
             ],
           ),
