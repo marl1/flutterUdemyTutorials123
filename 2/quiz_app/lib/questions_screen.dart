@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:quiz_app/answer_button.dart';
 import 'package:quiz_app/data/questions.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
   const QuestionsScreen({super.key});
@@ -38,7 +39,7 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch, // ask the children to take all space horizontally
           children: [
-            Text(style: TextStyle(color: Colors.white), textAlign: TextAlign.center, questions[currentQuestionId].text),
+            Text(style: GoogleFonts.lobster(fontSize: 40, color: Colors.white), textAlign: TextAlign.center, questions[currentQuestionId].text),
             SizedBox(height: 15),
             ...generateAnswerButtons(questions[currentQuestionId].answers),
           ],
