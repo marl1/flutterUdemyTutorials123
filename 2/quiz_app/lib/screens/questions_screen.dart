@@ -5,16 +5,22 @@ import 'package:quiz_app/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  const QuestionsScreen(this.showResult, {super.key});
+
+  final void Function() showResult;
 
   @override
   State<QuestionsScreen> createState() {
-    return _QuestionsScreenState();
+    return _QuestionsScreenState(showResult);
   }
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionId = 0;
+
+  _QuestionsScreenState(this.showResult);
+
+  final void Function() showResult;
 
   List<AnswerButton> generateAnswerButtons(List<String> answers) {
     return (answers.toList()..shuffle())
@@ -25,6 +31,9 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
   void answerQuestion() {
     setState(() {
       currentQuestionId++;
+      if (currentQuestionId >= questions.length) {
+        showResult();
+      }
       print("the currentQuestionId = $currentQuestionId");
     });
   }
