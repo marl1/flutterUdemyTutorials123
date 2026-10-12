@@ -5,34 +5,34 @@ import 'package:quiz_app/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen(this.showResult, {super.key});
+  const QuestionsScreen(this.showResult, {super.key, required this.onSelectAnswer});
 
   final void Function() showResult;
+  final void Function(String answer) onSelectAnswer;
 
   @override
   State<QuestionsScreen> createState() {
-    return _QuestionsScreenState(showResult);
+    return _QuestionsScreenState();
   }
 }
 
 class _QuestionsScreenState extends State<QuestionsScreen> {
   var currentQuestionId = 0;
 
-  _QuestionsScreenState(this.showResult);
-
-  final void Function() showResult;
-
   List<AnswerButton> generateAnswerButtons(List<String> answers) {
     return (answers.toList()..shuffle())
-        .map(((e) => AnswerButton(e, answerQuestion)))
+        .map(((e) => AnswerButton(e, ()=>answerQuestion(e))))
         .toList();
   }
 
-  void answerQuestion() {
+
+  void answerQuestion(String answerText) {
+    print("la reponse cliquee = $answerText");
     setState(() {
+      widget.onSelectAnswer(answerText);
       currentQuestionId++;
       if (currentQuestionId >= questions.length) {
-        showResult();
+        widget.showResult();
       }
       print("the currentQuestionId = $currentQuestionId");
     });
