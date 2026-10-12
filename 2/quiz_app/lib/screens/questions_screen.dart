@@ -5,9 +5,8 @@ import 'package:quiz_app/data/questions.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen(this.showResult, {super.key, required this.onSelectAnswer});
+  const QuestionsScreen({super.key, required this.onSelectAnswer});
 
-  final void Function() showResult;
   final void Function(String answer) onSelectAnswer;
 
   @override
@@ -31,9 +30,6 @@ class _QuestionsScreenState extends State<QuestionsScreen> {
     setState(() {
       widget.onSelectAnswer(answerText);
       currentQuestionId++;
-      if (currentQuestionId >= questions.length) {
-        widget.showResult();
-      }
       print("the currentQuestionId = $currentQuestionId");
     });
   }

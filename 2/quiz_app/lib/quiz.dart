@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/screens/questions_screen.dart';
 import 'package:quiz_app/screens/start_screen.dart';
 
@@ -16,6 +17,7 @@ class _QuizState extends State<Quiz> {
   var activeScreen = ScreenId.startScreen;
 
   void launchQuiz() {
+    selectedAnswers.clear();
     setState(() {
       activeScreen = ScreenId.quizScreen;
       print("changemennnnntzzwww!");
@@ -25,13 +27,13 @@ class _QuizState extends State<Quiz> {
   void chooseAnswer(String answer) {
     selectedAnswers.add(answer);
     print("La liste de reponse: $selectedAnswers");
-  }
-
-  void showResults() {
-    setState(() {
-      activeScreen = ScreenId.startScreen;
-      print("brqvo!");
-    });
+    print("selectedAnswers.length: ${selectedAnswers.length}");
+    print("questions.length: ${questions.length}");
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        activeScreen = ScreenId.startScreen;
+      });
+    }
   }
 
   @override
@@ -39,7 +41,7 @@ class _QuizState extends State<Quiz> {
     final Widget calculatedScreenWidget;
 
     if (activeScreen == ScreenId.quizScreen) {
-      calculatedScreenWidget = QuestionsScreen(showResults, onSelectAnswer:  chooseAnswer);
+      calculatedScreenWidget = QuestionsScreen(onSelectAnswer:  chooseAnswer);
     } else {
       calculatedScreenWidget = StartScreen(launchQuiz);
     }
