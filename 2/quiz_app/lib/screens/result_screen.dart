@@ -32,10 +32,11 @@ class ResultScreen extends StatelessWidget {
   @override
   Widget build(context) {
     print("ResultScreen build called");
-    
+
     final summaryData = buildSummaryData();
     final nbrQuestion = chosenAnswers.length + 1;
-    final nbrCorrectAnswers = summaryData.where((e) => e.userAnswer == e.correctAnswer).length+1;
+    final nbrCorrectAnswers =
+        summaryData.where((e) => e.userAnswer == e.correctAnswer).length + 1;
 
     return SizedBox(
       //Autre facon de centrer, SizedBox...
@@ -51,7 +52,15 @@ class ResultScreen extends StatelessWidget {
               style: TextStyle(color: Colors.white),
             ),
             SizedBox(height: 30),
-            QuestionSummary(summary: summaryData, chosenAnswers: chosenAnswers),
+            SizedBox(
+              height: 400, //un peu chiant que ça soit en dur.
+              child: SingleChildScrollView(
+                child: QuestionSummary(
+                  summary: summaryData,
+                  chosenAnswers: chosenAnswers,
+                ),
+              ),
+            ),
             SizedBox(height: 30),
             TextButton(
               onPressed: restartFunction,

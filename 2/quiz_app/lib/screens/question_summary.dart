@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/models/summaryItem.dart';
 
-class QuestionSummary extends StatelessWidget{
+class QuestionSummary extends StatelessWidget {
+  const QuestionSummary({
+    super.key,
+    required this.summary,
+    required this.chosenAnswers,
+  });
 
-  const QuestionSummary({super.key, required this.summary, required this.chosenAnswers});
-  
   final List<String> chosenAnswers;
   final List<Summaryitem> summary;
-
-
 
   List<Widget> buildSummaryWidgets() {
     final List<Widget> summaryWidgets = [];
@@ -32,7 +33,8 @@ class QuestionSummary extends StatelessWidget{
                 ),
               ),
             ),
-            Expanded( // Permet de wrapper le texte mais je n'ai pas bien compris pourquoi.
+            Expanded(
+              // Permet de wrapper le texte mais je n'ai pas bien compris pourquoi.
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -65,14 +67,9 @@ class QuestionSummary extends StatelessWidget{
     }
     return Colors.red;
   }
-  
+
   @override
   Widget build(ctx) {
-    return Column(
-          children: [
-            ...buildSummaryWidgets()
-          ]
-        );
+    return Column(children: [...buildSummaryWidgets()]);
   }
-  
 }
