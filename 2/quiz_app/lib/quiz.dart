@@ -44,7 +44,7 @@ class _QuizState extends State<Quiz> {
     if (activeScreen == ScreenId.quizScreen) {
       calculatedScreenWidget = QuestionsScreen(onSelectAnswer:  chooseAnswer);
     } else if (activeScreen == ScreenId.resultScreen) {
-      calculatedScreenWidget = ResultScreen(chosenAnswers: selectedAnswers,);
+      calculatedScreenWidget = ResultScreen(chosenAnswers: selectedAnswers, restartFunction:launchQuiz);
     } else {
       calculatedScreenWidget = StartScreen(launchQuiz);
     }
