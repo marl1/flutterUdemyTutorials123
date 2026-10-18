@@ -15,7 +15,6 @@ class ResultScreen extends StatelessWidget {
 
   List<Summaryitem> buildSummaryData() {
     final List<Summaryitem> summary = [];
-    var nbrReponseJuste = 0;
     for (var i = 0; i < chosenAnswers.length; i++) {
       summary.add(
         Summaryitem(
@@ -34,9 +33,9 @@ class ResultScreen extends StatelessWidget {
     print("ResultScreen build called");
 
     final summaryData = buildSummaryData();
-    final nbrQuestion = chosenAnswers.length + 1;
+    final nbrQuestion = chosenAnswers.length;
     final nbrCorrectAnswers =
-        summaryData.where((e) => e.userAnswer == e.correctAnswer).length + 1;
+        summaryData.where((e) => e.userAnswer == e.correctAnswer).length;
 
     return SizedBox(
       //Autre facon de centrer, SizedBox...
@@ -56,8 +55,7 @@ class ResultScreen extends StatelessWidget {
               height: 400, //un peu chiant que ça soit en dur.
               child: SingleChildScrollView(
                 child: QuestionSummary(
-                  summary: summaryData,
-                  chosenAnswers: chosenAnswers,
+                  summary: summaryData
                 ),
               ),
             ),

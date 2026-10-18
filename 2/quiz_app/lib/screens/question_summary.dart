@@ -1,15 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/models/summaryItem.dart';
 
 class QuestionSummary extends StatelessWidget {
   const QuestionSummary({
     super.key,
-    required this.summary,
-    required this.chosenAnswers,
+    required this.summary
   });
 
-  final List<String> chosenAnswers;
   final List<Summaryitem> summary;
 
   List<Widget> buildSummaryWidgets() {
