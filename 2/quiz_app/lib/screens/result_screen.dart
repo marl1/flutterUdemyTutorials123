@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/models/summaryItem.dart';
+import 'package:quiz_app/screens/question_summary.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({
@@ -12,7 +13,7 @@ class ResultScreen extends StatelessWidget {
   final List<String> chosenAnswers;
   final void Function() restartFunction;
 
-  List<Summaryitem> getSummaryData() {
+  List<Summaryitem> buildSummaryData() {
     final List<Summaryitem> summary = [];
     var nbrReponseJuste = 0;
     for (var i = 0; i < chosenAnswers.length; i++) {
@@ -28,72 +29,14 @@ class ResultScreen extends StatelessWidget {
     return summary;
   }
 
-  List<Widget> buildSummaryWidgets() {
-    final List<Widget> summaryWidgets = [];
-    for (final summaryItem in getSummaryData()) {
-      summaryWidgets.add(
-        Row(
-          children: [
-            CircleAvatar(
-              backgroundColor: determineCircleColor(
-                summaryItem.userAnswer,
-                summaryItem.correctAnswer,
-              ),
-              radius: 20,
-              child: Text(
-                (summaryItem.questionIndex + 1).toString(),
-                style: TextStyle(
-                  color: Colors.brown,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 30),
-                Text(
-                  summaryItem.questionText,
-                  style: TextStyle(color: Colors.white),
-                ),
-                Text(
-                  "Your answer: ${summaryItem.userAnswer}",
-                  style: TextStyle(color: Colors.purpleAccent),
-                ),
-                Text(
-                  "Correct answer: ${summaryItem.correctAnswer}",
-                  style: TextStyle(color: Colors.green),
-                ),
-              ],
-            ),
-          ],
-        ),
-      );
-    }
-    return summaryWidgets;
-  }
-
-  Color determineCircleColor(String s1, s2) {
-    if (s1 == s2) {
-      return Colors.green;
-    }
-    return Colors.red;
-  }
-
-  int getNbrCorrectAnswers() {
-    int nbrCorrectAnswers = 0;
-    for (final summaryItem in getSummaryData()) {
-      if (summaryItem.correctAnswer == summaryItem.userAnswer) {
-        nbrCorrectAnswers++;
-      }
-    }
-    return nbrCorrectAnswers;
-  }
-
   @override
   Widget build(context) {
     print("ResultScreen build called");
+    
+    final summaryData = buildSummaryData();
+    final nbrQuestion = chosenAnswers.length + 1;
+    final nbrCorrectAnswers = summaryData.where((e) => e.userAnswer == e.correctAnswer).length+1;
+
     return SizedBox(
       //Autre facon de centrer, SizedBox...
       width: double.infinity,
@@ -104,11 +47,11 @@ class ResultScreen extends StatelessWidget {
         child: Column(
           children: [
             Text(
-              "You answered ${getNbrCorrectAnswers()} out of ${chosenAnswers.length} questions correctly!",
+              "You answered $nbrCorrectAnswers out of $nbrQuestion questions correctly!",
               style: TextStyle(color: Colors.white),
             ),
             SizedBox(height: 30),
-            ...buildSummaryWidgets(),
+            QuestionSummary(summary: summaryData, chosenAnswers: chosenAnswers),
             SizedBox(height: 30),
             TextButton(
               onPressed: restartFunction,
