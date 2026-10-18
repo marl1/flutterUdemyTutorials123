@@ -10,13 +10,17 @@ class ResultScreen extends StatelessWidget {
     final List<Map<String, Object>> summary = [];
     var nbrReponseJuste = 0;
     for (var i = 0; i < chosenAnswers.length; i++) {
-      if (chosenAnswers[i] == questions[i].answers[0]) {
-        nbrReponseJuste++;
-      }
+      summary.add({
+        'question_index':i,
+        'question_text':questions[i].text,
+        'correct_answer':questions[i].answers[0],
+        'user_answer': chosenAnswers[i]
+        });
     }
     print("Vous avez répondu juste à $nbrReponseJuste questions !");
     return summary;
   }
+
 
   @override
   Widget build(context) {
