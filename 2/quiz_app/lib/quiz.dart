@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/data/questions.dart';
 import 'package:quiz_app/screens/questions_screen.dart';
+import 'package:quiz_app/screens/result_screen.dart';
 import 'package:quiz_app/screens/start_screen.dart';
 
 class Quiz extends StatefulWidget {
@@ -31,7 +32,7 @@ class _QuizState extends State<Quiz> {
     print("questions.length: ${questions.length}");
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        activeScreen = ScreenId.startScreen;
+        activeScreen = ScreenId.resultScreen;
       });
     }
   }
@@ -42,6 +43,8 @@ class _QuizState extends State<Quiz> {
 
     if (activeScreen == ScreenId.quizScreen) {
       calculatedScreenWidget = QuestionsScreen(onSelectAnswer:  chooseAnswer);
+    } else if (activeScreen == ScreenId.resultScreen) {
+      calculatedScreenWidget = ResultScreen(chosenAnswers: selectedAnswers,);
     } else {
       calculatedScreenWidget = StartScreen(launchQuiz);
     }
@@ -66,4 +69,4 @@ class _QuizState extends State<Quiz> {
   }
 }
 
-enum ScreenId { startScreen, quizScreen }
+enum ScreenId { startScreen, quizScreen, resultScreen }
